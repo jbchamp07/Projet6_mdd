@@ -1,0 +1,29 @@
+<div class="center">
+    <h2>Inscription</h2>
+    <form (ngSubmit)="onSubmit()" #loginForm="ngForm" class="form-container">
+
+        <!-- Nom d'utilisateur -->
+        <div class="form-group">
+            <label for="username">Nom d'utilisateur</label>
+            <input type="text" id="username" name="username" class="form-control" [(ngModel)]="username" required />
+        </div>
+
+        <!-- Email -->
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" class="form-control" [(ngModel)]="email" required />
+        </div>
+
+        <!-- Mot de passe -->
+        <div class="form-group">
+            <label for="password">Mot de passe</label>
+            <input type="password" id="password" name="password" class="form-control" [(ngModel)]="password" required />
+        </div>
+
+        <!-- Bouton de soumission -->
+        <div class="button-container">
+            <button type="submit" mat-raised-button color="primary" class="btn-primary" [disabled]="!loginForm.valid">S'inscrire</button>
+        </div>
+        
+    </form>
+</div>

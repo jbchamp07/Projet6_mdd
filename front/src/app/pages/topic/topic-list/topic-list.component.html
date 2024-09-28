@@ -1,0 +1,7 @@
+<div class="topic-container">
+    <div class="topic" *ngFor="let topic of topics">
+        <h2>{{ topic.name }}</h2>
+        <p class="post-description">{{ topic.description }}</p>
+        <button mat-raised-button class="custom-button" (click)="subscribe(topic.id)">S'abonner</button>
+    </div>
+</div>

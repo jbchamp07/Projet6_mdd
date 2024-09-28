@@ -1,0 +1,38 @@
+.center {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.buttons {
+  display: flex;
+  gap: 20%; /* Espace entre les boutons en pourcentage */
+  margin-top: 20px; /* Espace au-dessus des boutons */
+  justify-content: center; /* Centre les boutons horizontalement */
+}
+
+.custom-button {
+  background-color: white !important; /* Arrière-plan blanc */
+  border: 2px solid black !important; /* Contour bleu */
+  color: black !important; /* Texte bleu */
+  padding: 10px 20px; /* Ajuste le padding pour un meilleur centrage */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 150px; /* Largeur minimale pour assurer une bonne taille de bouton */
+  height: 40px; /* Hauteur du bouton */
+  text-transform: none !important; /* Empêche la mise en majuscules automatique si Material le fait */
+
+}
+/* Media query pour les petits écrans (comme les téléphones) */
+@media (max-width: 768px) {
+  .buttons {
+    flex-direction: column; /* Aligne les boutons verticalement */
+    gap: 10px; /* Plus grand espacement entre les boutons */
+  }
+
+  .custom-button {
+    width: 80%; /* Ajuste la largeur des boutons à 80% pour les petits écrans */
+  }
+}

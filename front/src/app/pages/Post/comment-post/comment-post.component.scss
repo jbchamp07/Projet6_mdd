@@ -1,0 +1,96 @@
+.post-container {
+    margin: 20px;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+  }
+  
+  .post-title {
+    font-weight: bold;
+    font-size: 24px;
+  }
+  
+  .post-info {
+    display: flex;
+    justify-content: left;
+    gap: 10%;
+    margin: 10px 0;
+    font-size: 14px;
+    color: #555;
+  }
+  
+  .post-description {
+    margin: 15px 0;
+  }
+  
+  .comments-list {
+    margin-top: 15px;
+  }
+  
+  .comment {
+    flex-grow: 1; /* Permet à l'élément comment de prendre toute la largeur restante */
+  padding: 5px;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  background-color: rgb(230, 227, 227);
+  }
+  
+  .comment-form {
+    margin-top: 20px;
+  }
+  
+  .comment-form textarea {
+    width: 100%;
+    height: 60px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    padding: 5px;
+  }
+  
+  .comment-form button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 3px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+  }
+  
+
+  .comment-form {
+    position: relative;
+    margin-top: 20px;
+  }
+  
+  .comment-form textarea {
+    width: 100%;
+    height: 60px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    padding: 5px;
+    box-sizing: border-box;
+    justify-content: left;
+    width: 95%;
+  }
+  
+  .comment-form .send-icon {
+    position: absolute;
+    right: 2%;
+    bottom: 45%;
+    font-size: 24px;
+    color: blueviolet;
+    cursor: pointer;
+    margin: auto;
+  }
+  .comment-container {
+    display: flex; /* Aligne les enfants côte à côte */
+    align-items: center; /* Centre verticalement les éléments */
+    margin: 5px 0;
+  }
+  .comment-author {
+    margin-right: 10px; /* Ajoute un espace entre l'auteur et le message */
+  }
+  

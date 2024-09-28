@@ -1,0 +1,32 @@
+<div class="center">
+    <h2>Profil utilisateur</h2>
+    <form (ngSubmit)="onSubmit()" #loginForm="ngForm" class="form-container">
+
+        <!-- Email ou Nom d'utilisateur -->
+        <div class="form-group">
+            <label for="username">Nom d'utilisateur</label>
+            <input type="text" id="username" name="username" class="form-control" [(ngModel)]="user.username" required />
+        </div>
+
+        <!-- Mot de passe -->
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" class="form-control" [(ngModel)]="user.email" required />
+        </div>
+
+        <!-- Bouton de soumission -->
+        <div class="button-container">
+            <button type="submit" mat-raised-button color="primary" class="btn-primary" [disabled]="!loginForm.valid">Sauvegarder</button>
+        </div>
+    </form>
+    
+</div>
+    <hr>
+    <h2 id="sub-title">Abonnements</h2>
+    <div class="topic-container">
+        <div class="topic" *ngFor="let topic of topics">
+            <h2>{{ topic.name }}</h2>
+            <p class="post-description">{{ topic.description }}</p>
+            <button mat-raised-button class="custom-button" (click)="unsubscribe(topic.id)">Se désabonner</button>
+        </div>
+    </div>

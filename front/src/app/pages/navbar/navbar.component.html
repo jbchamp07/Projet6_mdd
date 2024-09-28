@@ -1,0 +1,15 @@
+<nav>
+    <div class="logo">
+      <img src="/assets/logo_p6.png" alt="Logo" />
+    </div>
+    <ul class="nav-links">
+      <li *ngIf="isLoggedIn"><a routerLink="/posts">Articles</a></li>
+      <li *ngIf="isLoggedIn"><a routerLink="/topics">Thèmes</a></li>
+      <li *ngIf="isLoggedIn">
+        <a routerLink="/user/me" aria-label="Profil">
+          👤
+        </a>
+      </li>
+      <li *ngIf="isLoggedIn"><a (click)="logOut()">Se déconnecter</a></li>
+    </ul>
+  </nav>

@@ -1,0 +1,53 @@
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff; /* Fond blanc pour la barre de navigation */
+    color: black; /* Couleur du texte par défaut */
+    padding: 10px 20px;
+    border-bottom: 2px solid black; /* Ligne noire en dessous */
+  }
+  
+  .logo img {
+    height: 50px; /* Ajustez la taille du logo */
+  }
+  
+  .nav-links {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+  }
+  
+  .nav-links li {
+    margin-left: 20px;
+  }
+  
+  .nav-links a {
+    color: black; /* Couleur des liens en noir */
+    text-decoration: none;
+    font-size: 20px; /* Augmentez la taille du texte pour l'émoji */
+  }
+  
+  .nav-links a:hover {
+    color: blueviolet;
+  }
+  @media (max-width: 768px) {
+    .nav-links {
+      display: none; /* Cacher les liens de navigation */
+    }
+  
+    nav {
+      justify-content: center; /* Centrer le contenu de la barre de navigation */
+      border-bottom:#fff
+    }
+  
+    .logo {
+      flex-grow: 1; /* Permet au logo de prendre de l'espace pour le centrer */
+    }
+  
+    .logo img {
+      display: block; /* S'assurer que l'image du logo est affichée */
+      margin: 0 auto; /* Centrer le logo horizontalement */
+      height: 80px; /* Ajustez la taille du logo si nécessaire */
+    }
+  }

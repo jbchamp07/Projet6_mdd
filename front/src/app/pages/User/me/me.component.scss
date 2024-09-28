@@ -1,0 +1,108 @@
+.center {
+    height: 50vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid black;
+    border-radius: 4px;
+    font-size: 16px;
+    
+  }
+  
+  button {
+    width: 50%;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    
+  }
+  .button-container {
+    display: flex;
+    justify-content: center;  /* This centers the button */
+  }
+  .create-button {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: white;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    margin: 20px;
+}
+
+.topic-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    /* 2 articles par ligne */
+    gap: 20px;
+    /* Espacement entre les articles */
+    margin: 20px;
+}
+
+.topic {
+    border: 1px solid #ccc;
+    padding: 15px;
+    /* Padding autour du contenu de l'article */
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    /* Couleur de fond */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    /* Ombre légère */
+}
+
+.topic h2 {
+    font-weight: bold;
+    /* Titre en gras */
+    margin: 0;
+    /* Enlever la marge par défaut */
+}
+
+.topic-description {
+    margin-top: 10px;
+    /* Marge au-dessus de la description */
+}
+.custom-button {
+    background-color: blueviolet !important; /* Arrière-plan blanc */
+    color: white !important; /* Texte bleu */
+    padding: 10px 20px; /* Ajuste le padding pour un meilleur centrage */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 150px; /* Largeur minimale pour assurer une bonne taille de bouton */
+    height: 40px; /* Hauteur du bouton */
+    text-transform: none !important; /* Empêche la mise en majuscules automatique si Material le fait */
+  
+  }
+  button{
+    margin: auto;
+  }
+
+  hr{
+    width: 80%;
+  }
+  #sub-title{
+    display: flex;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 20px;
+  }
+  /* Media query pour les petits écrans (comme les téléphones) */
+@media (max-width: 768px) {
+    .topic-container {
+        grid-template-columns: repeat(1, 1fr);
+    }
+  
+  }

@@ -1,0 +1,59 @@
+.create-button {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: white;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    margin: 20px;
+}
+
+.post-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    /* 2 articles par ligne */
+    gap: 20px;
+    /* Espacement entre les articles */
+    margin: 20px;
+}
+
+.post {
+    border: 1px solid #ccc;
+    padding: 15px;
+    /* Padding autour du contenu de l'article */
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    /* Couleur de fond */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    /* Ombre légère */
+}
+
+.post h2 {
+    font-weight: bold;
+    /* Titre en gras */
+    margin: 0;
+    /* Enlever la marge par défaut */
+}
+
+.post-meta {
+    display: flex;
+    justify-content: space-around;
+    /* Aligner la date à gauche et l'auteur à droite */
+    font-size: 0.9em;
+    /* Taille de police réduite pour les métadonnées */
+    color: #555;
+    /* Couleur gris pour les métadonnées */
+    margin: 10px 0;
+    /* Marge autour des métadonnées */
+}
+
+.post-description {
+    margin-top: 10px;
+    /* Marge au-dessus de la description */
+}
+#post-link{
+    text-decoration: none;
+}

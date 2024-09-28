@@ -1,0 +1,46 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+<div class="post-container">
+    <!-- Titre en gras -->
+    <h1 class="post-title">{{ post.title }}</h1>
+  
+    <!-- Date, auteur et thème côte à côte -->
+    <div class="post-info">
+      <span class="post-date">{{ post.createdAt | date:'shortDate' }}</span>
+      <span class="post-author">{{ post.user?.username }}</span>
+      <span class="post-topics">
+        <ng-container *ngFor="let topic of post.topics; let last = last">
+          {{ topic.name }}<span *ngIf="!last">, </span>
+        </ng-container>
+      </span>
+    </div>
+  
+    <!-- Description -->
+    <p class="post-description">{{ post.description }}</p>
+  
+    <!-- Ligne de séparation -->
+    <hr>
+  
+    <!-- Section des commentaires -->
+    <h2>Commentaires</h2>
+    <div class="comments-list">
+        <div *ngFor="let comment of post.comments" class="comment-container">
+            <span class="comment-author">{{ comment.user.username }}</span>
+            <div class="comment">
+              <span class="comment-text">{{ comment.message }}</span>
+            </div>
+          </div>
+          
+    </div>
+  
+    <!-- Formulaire de commentaire -->
+    <div class="comment-form">
+        <div class="comment-form">
+            <textarea [(ngModel)]="newComment" placeholder="Écrivez votre commentaire ici..."></textarea>
+            <i class="fa fa-paper-plane send-icon" (click)="addComment()"></i>
+          </div>
+      <!--<textarea [(ngModel)]="newComment" placeholder="Écrivez votre commentaire ici..."></textarea>
+       <button (click)="addComment()">Commenter</button> -->
+    </div>
+  </div>
+  
