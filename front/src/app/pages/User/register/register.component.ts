@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { UserRegister } from 'src/app/dto/UserRegister';
+import { UserServiceService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-register',
@@ -6,22 +8,24 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
-  username: string = '';
-  email: string = '';
-  password: string = '';
-  constructor() { }
+  user: UserRegister = {
+    username: '',
+    email: '',
+    password: ''
+  };
+  constructor(private userService: UserServiceService) { }
 
   ngOnInit(): void {
   }
   onSubmit() {
-    if (this.username && this.email && this.password) {
-      // Action à effectuer lors de la soumission du formulaire
+    if (this.user.username && this.user.email && this.user.password) {
+      this.userService.register(this.user);
       console.log('Formulaire soumis avec succès :');
-      console.log('Nom d\'utilisateur : ', this.username);
-      console.log('Email : ', this.email);
-      console.log('Mot de passe : ', this.password);
     } else {
       console.error('Le formulaire est invalide');
     }
   }
+
+  
+
 }

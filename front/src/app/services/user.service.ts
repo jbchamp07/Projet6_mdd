@@ -6,6 +6,7 @@ import { TokenService } from './token.service';
 import { Router } from '@angular/router';
 import {LoginRequest } from '../dto/LoginRequest';
 import { AuthResponse } from '../dto/AuthResponse';
+import { UserRegister } from '../dto/UserRegister';
 
 @Injectable({
   providedIn: 'root'
@@ -21,29 +22,30 @@ export class UserServiceService {
   }
 
 // Méthode de login
-login(username: string, password: string): void {
+public login(username: string, password: string): void {
   let loginRequest: LoginRequest = {username: username, password:password};
   this.httpClient.post<AuthResponse>(`${this.apiUrl}/login`, loginRequest).subscribe(token => {
     this.tokenService.saveToken(token.token);
     this.router.navigate(['/posts']);
   });
 }
-/*login(username: string, password: string): void {
-  let loginRequest: LoginRequest = {username: username, password:password};
-  this.httpClient.post(`${this.apiUrl}/login`, loginRequest).pipe(
-    tap((response: any) => {
-      // Sauvegarder le token reçu dans le localStorage
-      alert(response.token);
-      this.tokenService.saveToken(response.token);
-      this.router.navigate(['/posts']);
-    })
-  );
-}*/
+
+// Méthode register
+public register(user: UserRegister): void {
+  this.httpClient.post<AuthResponse>(`${this.apiUrl}/register`, user).subscribe(token => {
+    this.tokenService.saveToken(token.token);
+    this.router.navigate(['/posts']);
+  });
+}
 
 // Méthode de logout
-logout(): void {
+public logout(): void {
   this.tokenService.clearToken();
   this.router.navigate(['']);
+}
+
+public updateUser(user: User): Observable<string> {
+  return this.httpClient.put<string>(`${this.apiUrl}/me/update`,user);
 }
 
 }

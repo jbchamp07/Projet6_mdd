@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
+import { NewComment } from 'src/app/dto/NewComment';
+import { Comment } from 'src/app/interfaces/Comment';
 import { Post } from 'src/app/interfaces/Post';
 import { PostService } from 'src/app/services/post.service';
 
@@ -12,8 +14,9 @@ import { PostService } from 'src/app/services/post.service';
 export class CommentPostComponent implements OnInit {
   post!: Post;
   postId: number = 0;
+  comments!: Comment[];
 
-  newComment: string = '';
+  newComment: NewComment = {message: ""};
   constructor(private postService: PostService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -23,20 +26,27 @@ export class CommentPostComponent implements OnInit {
       this.postService.GetPostById(this.postId).subscribe(p =>{
         this.post = p;
       });
+      this.postService.getComments(this.postId).subscribe(c => {
+        this.comments = c;
+      });
 
     });
+    
   }
 
   addComment() {
-    if (this.newComment.trim()) {
-      const comment = {
-        user: { name: 'Pseudo de l’utilisateur' }, // Remplacez ceci par l’utilisateur actuel
-        text: this.newComment,
-      };
+    if (this.newComment.message.trim()) {
+      
+      this.postService.addComment(this.postId,this.newComment).subscribe(
+        response => {
+        alert("Commentaire ajouté avec succès");
+      },
+      error => {
+        alert("Erreur lors de l'ajout du commentaire");
+      });
 
-      // Ajoutez le commentaire à la liste des commentaires
-      //this.post.comments.push(comment);
-      this.newComment = ''; // Réinitialisez le champ de texte
+
+      this.newComment.message = ''; // Réinitialisez le champ de texte
     }
   }
 }

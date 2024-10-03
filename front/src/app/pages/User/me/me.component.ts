@@ -27,10 +27,24 @@ export class MeComponent implements OnInit {
 
 
   onSubmit() {
-    alert('Method not implemented.');
+    this.userService.updateUser(this.user).subscribe(
+      response => {
+        alert("Modification éffectué avec succès");
+      },
+      error => {
+        alert("Erreur lors de la modification");
+      }
+    );
   }
 
-  unsubscribe(arg0: any) {
-    alert('Method not implemented.');
+  unsubscribe(topicId: number) {
+    this.topicService.unSubscribe(topicId).subscribe(
+      response => {
+        alert("Désabonnement OK");
+      },
+      error => {
+        alert("Erreur lors du Désabonnement");
+      }
+    );
   }
 }

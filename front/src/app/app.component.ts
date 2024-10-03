@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +7,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'front';
+
+  @HostListener('window:beforeunload', ['$event'])
+  unloadHandler(event: Event) {
+    // Appeler la méthode souhaitée lors de la fermeture de l'application
+    localStorage.clear();
+  }
+
 }

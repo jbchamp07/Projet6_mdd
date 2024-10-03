@@ -1,5 +1,6 @@
 package com.openclassrooms.mddapi.Controller;
 
+import com.openclassrooms.mddapi.DTO.MessageResponse;
 import com.openclassrooms.mddapi.Model.Topic;
 import com.openclassrooms.mddapi.Service.TopicService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,31 +17,28 @@ public class TopicController {
     @Autowired
     private TopicService topicService;
 
+    //Get all topics
     @GetMapping("")
     public List<Topic> getTopics(){
         return topicService.getAllTopics();
     }
 
-
+    //Add a topic subscription to a user
     @PostMapping("/subscribe")
-    public String addSubToTopic(@RequestBody int topicId){
+    public MessageResponse addSubToTopic(@RequestBody int topicId){
         return topicService.subscription(topicId);
     }
 
+    //Get all subscriptions of a user
     @GetMapping("/me")
     public List<Topic> getUserTopic(){
         return topicService.getTopicsFromUser();
     }
-    /*@PostMapping("")
-    public String createTopic(Topic topic){
-        return topicService.createTopic(topic);
+
+    //Unsubscribe a user from a topic
+    @DeleteMapping("/unsubscribe/{id}")
+    public MessageResponse unSubscribe(@PathVariable("id") long topicId){
+        return topicService.unSubscribe(topicId);
     }
-    @PutMapping("/{id}")
-    public String updateTopics(Topic topic){
-        return topicService.updateTopic(topic);
-    }
-    @DeleteMapping("")
-    public String deleteTopic(long id){
-        return topicService.deleteTopic(id);
-    }*/
+
 }

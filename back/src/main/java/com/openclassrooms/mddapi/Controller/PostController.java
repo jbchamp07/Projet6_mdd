@@ -1,7 +1,9 @@
 package com.openclassrooms.mddapi.Controller;
 
+import com.openclassrooms.mddapi.DTO.CommentDTO;
+import com.openclassrooms.mddapi.DTO.MessageResponse;
 import com.openclassrooms.mddapi.DTO.PostCreationDTO;
-import com.openclassrooms.mddapi.DTO.PostDTO;
+import com.openclassrooms.mddapi.Model.Comment;
 import com.openclassrooms.mddapi.Model.Post;
 import com.openclassrooms.mddapi.Model.Topic;
 import com.openclassrooms.mddapi.Service.PostService;
@@ -20,68 +22,34 @@ public class PostController {
     @Autowired
     private PostService postService;
 
-    // Endpoint pour créer un post
+    //Create a post
     @PostMapping
-    public String createPost(@RequestBody PostCreationDTO post) {
+    public MessageResponse createPost(@RequestBody PostCreationDTO post) {
         return postService.createPost(post);
     }
 
-    // Endpoint pour obtenir tous les posts
+    //Get all posts of a user subscriptions
     @GetMapping
     public List<Post> getAllPosts() {
         List<Post> p = postService.getAllPosts();
         return p;
     }
 
+    //Get a post informations by id
     @GetMapping("/{id}")
     public Post getPostById(@PathVariable("id") long id) {
         return postService.getPostById(id);
     }
 
-/*
-    // Endpoint pour obtenir un post par ID
-    @GetMapping("/{id}")
-    public ResponseEntity<Post> getPostById(@PathVariable("id") long id) {
-        Post post = postService.getPostById(id);
-        if (post != null) {
-            return new ResponseEntity<>(post, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-    }*/
+    //Add a comment to a post
+    @PostMapping("/{id}")
+    public MessageResponse addComment(@PathVariable("id") long postId, @RequestBody CommentDTO commentDTO) {
+        return postService.addComment(postId,commentDTO);
+    }
 
-    // Endpoint pour mettre à jour un post
-    /*@PutMapping("/{id}")
-    public ResponseEntity<Post> updatePost(@PathVariable("id") long id, @RequestBody Post updatedPost) {
-        Post existingPost = postService.getPostById(id);
-        if (existingPost != null) {
-            updatedPost.setId(id); // s'assurer que l'ID correspond
-            postService.updatePost(updatedPost);
-            return new ResponseEntity<>(updatedPost, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-    }*/
-
-    // Endpoint pour supprimer un post
-    /*@DeleteMapping("/{id}")
-    public String deletePost(@PathVariable("id") long id) {
-        postService.deletePost(id);
-        return "Post deleted";
-    }*/
-
-    // Endpoint pour obtenir les posts d'un sujet spécifique
-    /*@GetMapping("/topic/{topic}")
-    public ResponseEntity<List<Post>> getPostsFromATopic(@PathVariable("topic") String topic) {
-        List<Post> posts = postService.getPostsFromATopic(topic);
-        return new ResponseEntity<>(posts, HttpStatus.OK);
-    }*/
-
-    // Endpoint pour obtenir les posts de plusieurs sujets
-    /*@PostMapping("/topics")
-    public ResponseEntity<List<Post>> getPostsFromTopics(@RequestBody List<Topic> topics) {
-        List<Post> posts = postService.getPostsFromTopics(topics);
-        return new ResponseEntity<>(posts, HttpStatus.OK);
-    }*/
-
+    //Get all comments of a post
+    @GetMapping("/{id}/comments")
+    public List<Comment> getComments(@PathVariable("id") long postId){
+        return postService.getComments(postId);
+    }
 }

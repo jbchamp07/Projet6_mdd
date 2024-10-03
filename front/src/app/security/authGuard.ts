@@ -11,7 +11,6 @@ import { TokenService } from "../services/token.service";
   
     canActivate(): boolean {
       const token = this.tokenService.getToken();
-  
       if (token) {
         // Si le token est présent, permettre l'accès à la route
         return true;

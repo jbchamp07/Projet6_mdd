@@ -1,5 +1,5 @@
 <div id="header">
-    <a href="posts/create" class="create-button">Créer article</a>
+    <a [routerLink]="['/posts/create']" class="create-button">Créer article</a>
     <span>Trié par:</span>
     <select id="sort" [(ngModel)]="selectedSortOption" (change)="onSortChange()">
         <option value="date asc">Date</option>

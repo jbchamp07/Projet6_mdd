@@ -1,8 +1,6 @@
 package com.openclassrooms.mddapi.Service;
 
-import com.openclassrooms.mddapi.DTO.AuthSuccess;
-import com.openclassrooms.mddapi.DTO.LoginRequest;
-import com.openclassrooms.mddapi.DTO.RegisterRequest;
+import com.openclassrooms.mddapi.DTO.*;
 import com.openclassrooms.mddapi.Model.User;
 import com.openclassrooms.mddapi.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,15 +23,16 @@ public class UserService {
     private JwtService jwtService;
     @Autowired
     private PasswordEncoder passwordEncoder;
-    public void deleteUser(long id){
-        userRepository.deleteById(id);
-    }
+
+    //Get user information by is id
     public User getUserById(long id){
         return userRepository.findById(id).get();
     }
+    //Get user information by is username
     public User getUserByUsername(String username){
         return userRepository.findByUsername(username).get();
     }
+    //Get user information by is email
     public User getUserByEmail(String email){
         return userRepository.findByEmail(email).get();
     }
@@ -60,7 +59,6 @@ public class UserService {
 
     if(passwordEncoder.matches(request.getPassword(),user.getPassword())){
             String token = jwtService.generateToken(user);
-            //TODO verifier configuration du token
             SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(user.getUsername(),request.getPassword()));
             return new AuthSuccess(token);
     }else{
@@ -68,17 +66,23 @@ public class UserService {
     }
     }
     //Get user by authentication
-    //TODO
     public User getUserInfo() {
-        /*Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
-        return  userRepository.findByUsername(username).get();*/
-        User u = new User();
-        u.setUsername("u");
-        u.setId(1);
-        u.setEmail("a.a@gmail.com");
-        u.setCreatedAt(null);
-        u.setPassword("p");
-        return u;
+        return  userRepository.findByUsername(username).get();
+    }
+
+    //Update user informations
+    public MessageResponse updateUser(UserUpdater userUpdated) {
+        try{
+            User user = getUserInfo();
+            user.setUsername(userUpdated.getUsername());
+            user.setEmail(userUpdated.getEmail());
+            userRepository.save(user);
+            return new MessageResponse("Modifier éffectué avec succès");
+        }catch (Exception e){
+            return new MessageResponse("Erreur lors de la modification");
+        }
+
     }
 }

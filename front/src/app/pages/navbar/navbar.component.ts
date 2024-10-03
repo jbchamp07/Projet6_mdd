@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { TokenService } from 'src/app/services/token.service';
 import { UserServiceService } from 'src/app/services/user.service';
 
@@ -9,16 +10,13 @@ import { UserServiceService } from 'src/app/services/user.service';
 })
 export class NavbarComponent implements OnInit {
 
-  isLoggedIn!: boolean ;
-  constructor(private tokenService: TokenService,private userService: UserServiceService) { }
+  constructor(public tokenService: TokenService,private userService: UserServiceService) { }
 
   ngOnInit(): void {
-    this.isLoggedIn = this.tokenService.Islogged();
   }
 
   logOut() {
     this.userService.logout();
-    this.isLoggedIn = false;
     }
 
 }

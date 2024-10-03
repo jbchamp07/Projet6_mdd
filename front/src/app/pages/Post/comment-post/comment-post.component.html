@@ -24,8 +24,8 @@
     <!-- Section des commentaires -->
     <h2>Commentaires</h2>
     <div class="comments-list">
-        <div *ngFor="let comment of post.comments" class="comment-container">
-            <span class="comment-author">{{ comment.user.username }}</span>
+        <div *ngFor="let comment of comments" class="comment-container">
+            <span class="comment-author">{{ comment.user?.username }}</span>
             <div class="comment">
               <span class="comment-text">{{ comment.message }}</span>
             </div>
@@ -36,11 +36,9 @@
     <!-- Formulaire de commentaire -->
     <div class="comment-form">
         <div class="comment-form">
-            <textarea [(ngModel)]="newComment" placeholder="Écrivez votre commentaire ici..."></textarea>
+            <textarea [(ngModel)]="newComment.message" placeholder="Écrivez votre commentaire ici..."></textarea>
             <i class="fa fa-paper-plane send-icon" (click)="addComment()"></i>
           </div>
-      <!--<textarea [(ngModel)]="newComment" placeholder="Écrivez votre commentaire ici..."></textarea>
-       <button (click)="addComment()">Commenter</button> -->
     </div>
   </div>
   

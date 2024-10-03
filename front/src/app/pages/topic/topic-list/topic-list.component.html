@@ -2,6 +2,7 @@
     <div class="topic" *ngFor="let topic of topics">
         <h2>{{ topic.name }}</h2>
         <p class="post-description">{{ topic.description }}</p>
-        <button mat-raised-button class="custom-button" (click)="subscribe(topic.id)">S'abonner</button>
+        <button *ngIf="isTopicInUserTopics(topic)" mat-raised-button class="custom-button" (click)="unsubscribe(topic.id)">Se désabonner</button>
+        <button *ngIf="!isTopicInUserTopics(topic)" mat-raised-button class="custom-button" (click)="subscribe(topic.id)">S'abonner</button>
     </div>
 </div>

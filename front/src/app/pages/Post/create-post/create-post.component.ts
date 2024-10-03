@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Post } from 'src/app/interfaces/Post';
 import { Topic } from 'src/app/interfaces/Topic';
@@ -20,7 +21,7 @@ export class CreatePostComponent implements OnInit {
   };
   confirmation: string = "";
 
-  constructor(private postService: PostService, private topicService: TopicServiceService) {
+  constructor(private postService: PostService, private topicService: TopicServiceService,private router: Router) {
     
   }
 
@@ -30,13 +31,15 @@ export class CreatePostComponent implements OnInit {
 
   onSubmit() {
     if (this.post.title && this.post.topics && this.post.description) {
-      this.postService.createPost(this.post).subscribe((response) => {
-        this.confirmation = response;
-        alert(this.confirmation);
-        this.post.title = "";
-        this.post.topics = [];
-        this.post.description = "";
+      this.postService.createPost(this.post).subscribe(
+        response => {
+        alert("Post créer");
+        this.router.navigate(['/posts']);
+      },
+      error => {
+        alert("Erreur lors de la création du post");
       });
+
     } else {
       alert('Le formulaire est invalide');
     }

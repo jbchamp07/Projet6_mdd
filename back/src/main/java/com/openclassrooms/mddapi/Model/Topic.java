@@ -17,7 +17,5 @@ public class Topic {
     @ManyToMany
     @JoinTable(name = "topic_subscribers", joinColumns = @JoinColumn(name = "topic_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
     private List<User> subcribers;
-    /*@ManyToMany
-    @JoinTable(name = "post_subscribers", joinColumns = @JoinColumn(name = "post_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
-    private List<User> subcribers;*/
+
 }

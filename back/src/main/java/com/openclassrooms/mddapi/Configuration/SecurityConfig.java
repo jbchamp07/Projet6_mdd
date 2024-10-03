@@ -37,42 +37,22 @@ public class SecurityConfig {
     //Spring security config access with user auth
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        /*return http
-                .csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(
-                ).anyRequest().permitAll().and().build();*/
-        /*return http
-                .cors(cors -> cors.configurationSource(request -> {
-                    CorsConfiguration config = new CorsConfiguration();
-                    config.setAllowedOrigins(List.of("http://localhost:4200")); // Origine autorisée
-                    config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-                    config.setAllowedHeaders(List.of("*"));
-                    config.setAllowCredentials(true); // Si nécessaire pour les cookies
-                    return config;
-                }))
-                .csrf(csrf -> csrf.disable())  // Désactivation du CSRF si nécessaire
-                .authorizeHttpRequests(auth -> auth
-                        // Permet l'accès aux pages /login et /register sans authentification
-                        .antMatchers("/api/auth/login", "/api/auth/register").permitAll()
-                        // Toutes les autres requêtes nécessitent une authentification
-                        .anyRequest().authenticated()
-                )
-                .build();*/
+
         return http
                 .cors(cors -> cors.configurationSource(request -> {
                     CorsConfiguration config = new CorsConfiguration();
                     config.setAllowedOrigins(List.of("http://localhost:4200")); // Origine autorisée
                     config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
                     config.setAllowedHeaders(List.of("*"));
-                    config.setAllowCredentials(true); // Si nécessaire pour les cookies
+                    config.setAllowCredentials(true);
                     return config;
                 }))
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(
                         auth -> auth
-                        // Permet l'accès aux pages /login et /register sans authentification
+                        // Permit access to pages /login et /register without authentication
                         .antMatchers("/api/auth/login", "/api/auth/register").permitAll()
-                        // Toutes les autres requêtes nécessitent une authentification
+                        // All others requests need authentication
                         .anyRequest().authenticated()).userDetailsService(userDetailsService)
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
@@ -80,7 +60,7 @@ public class SecurityConfig {
                 .build();
     }
 
-
+    //Encode password
     @Bean
     public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
