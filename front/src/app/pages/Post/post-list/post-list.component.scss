@@ -40,8 +40,10 @@
 
 .post-meta {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     /* Aligner la date à gauche et l'auteur à droite */
+    align-items: center;
+    position: relative;
     font-size: 0.9em;
     /* Taille de police réduite pour les métadonnées */
     color: #555;
@@ -50,10 +52,24 @@
     /* Marge autour des métadonnées */
 }
 
+.post-meta span:first-child {
+    margin-right: auto;
+    /* Aligne le premier span à gauche */
+}
+
+.post-meta span:last-child {
+    position: absolute;
+    left: 50%;
+    /* Centre horizontalement */
+    transform: translateX(-50%);
+    /* Ajuste pour bien centrer */
+}
+
 .post-description {
     margin-top: 10px;
     /* Marge au-dessus de la description */
 }
-#post-link{
+
+#post-link {
     text-decoration: none;
 }

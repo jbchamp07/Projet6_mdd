@@ -1,53 +1,115 @@
 nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #fff; /* Fond blanc pour la barre de navigation */
-    color: black; /* Couleur du texte par défaut */
-    padding: 10px 20px;
-    border-bottom: 2px solid black; /* Ligne noire en dessous */
-  }
-  
-  .logo img {
-    height: 50px; /* Ajustez la taille du logo */
-  }
-  
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+  color: black;
+  padding: 10px 20px;
+  border-bottom: 2px solid black;
+}
+
+.logo img {
+  height: 50px;
+}
+
+.nav-links {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+}
+
+.nav-links li {
+  margin-left: 20px;
+}
+
+.nav-links a {
+  color: black;
+  text-decoration: none;
+  font-size: 20px;
+}
+
+.nav-links a:hover {
+  color: blueviolet;
+}
+
+/* Styles pour le bouton hamburger */
+.menu-toggle {
+  display: none; /* Caché par défaut */
+  font-size: 30px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+// @media (max-width: 768px) {
+//   .nav-links {
+//     display: none; /* Cacher les liens de navigation par défaut */
+//     flex-direction: column;
+//     position: absolute;
+//     top: 60px; /* Position en dessous de la navbar */
+//     right: 0;
+//     background-color: #fff;
+//     width: 200px;
+//     border-left: 2px solid black;
+//   }
+
+//   .nav-links.active {
+//     display: flex; /* Afficher les liens lorsque le menu est ouvert */
+//   }
+
+//   nav {
+//     justify-content: space-between;
+//   }
+
+//   .menu-toggle {
+//     display: block; /* Afficher le bouton hamburger sur les petits écrans */
+//   }
+
+//   .logo {
+//     flex-grow: 1;
+//   }
+
+//   .logo img {
+//     display: block;
+//     margin: 0 auto;
+//     height: 80px;
+//   }
+// }
+@media (max-width: 768px) {
   .nav-links {
-    list-style-type: none;
-    padding: 0;
-    display: flex;
+    display: none; /* Cacher les liens de navigation par défaut */
+    flex-direction: column;
+    position: absolute;
+    top: 0; /* Position en haut de l'écran */
+    right: 0; /* Alignement à droite */
+    width: 60%; /* Largeur de 60% */
+    height: 100vh; /* Hauteur complète de l'écran */
+    background-color: #fff;
+    z-index: 10; /* S'assurer que le menu est au-dessus des autres éléments */
+    border-left: 2px solid black; /* Optionnel : bordure gauche pour délimiter */
+    overflow-y: auto; /* Permettre le défilement si nécessaire */
   }
-  
+
+  .nav-links.active {
+    display: flex; /* Afficher les liens lorsque le menu est ouvert */
+  }
+
   .nav-links li {
-    margin-left: 20px;
+    margin: 20px 0; /* Espacement entre les éléments */
+    text-align: center; /* Centrer les liens */
   }
-  
-  .nav-links a {
-    color: black; /* Couleur des liens en noir */
-    text-decoration: none;
-    font-size: 20px; /* Augmentez la taille du texte pour l'émoji */
+
+  .menu-toggle {
+    display: block; /* Afficher le bouton hamburger sur les petits écrans */
   }
-  
-  .nav-links a:hover {
-    color: blueviolet;
+
+  .logo {
+    flex-grow: 1;
   }
-  @media (max-width: 768px) {
-    .nav-links {
-      display: none; /* Cacher les liens de navigation */
-    }
-  
-    nav {
-      justify-content: center; /* Centrer le contenu de la barre de navigation */
-      border-bottom:#fff
-    }
-  
-    .logo {
-      flex-grow: 1; /* Permet au logo de prendre de l'espace pour le centrer */
-    }
-  
-    .logo img {
-      display: block; /* S'assurer que l'image du logo est affichée */
-      margin: 0 auto; /* Centrer le logo horizontalement */
-      height: 80px; /* Ajustez la taille du logo si nécessaire */
-    }
+
+  .logo img {
+    display: block;
+    margin: 0 auto;
+    height: 80px;
   }
+}

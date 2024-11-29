@@ -9,9 +9,11 @@ import { UserServiceService } from 'src/app/services/user.service';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
-
+  menuOpen = false;
   constructor(public tokenService: TokenService,private userService: UserServiceService) { }
-
+  toggleMenu() {
+    this.menuOpen = !this.menuOpen;
+  }
   ngOnInit(): void {
   }
 

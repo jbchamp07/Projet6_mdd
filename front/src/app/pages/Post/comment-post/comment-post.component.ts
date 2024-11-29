@@ -39,6 +39,7 @@ export class CommentPostComponent implements OnInit {
       
       this.postService.addComment(this.postId,this.newComment).subscribe(
         response => {
+          //this.comments.push()
         alert("Commentaire ajouté avec succès");
       },
       error => {

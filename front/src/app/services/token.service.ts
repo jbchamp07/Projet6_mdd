@@ -15,18 +15,22 @@ export class TokenService {
 
   // Sauvegarder le token dans le localStorage
   public saveToken(token: string): void {
-    localStorage.setItem(this.TOKEN_KEY, token);
+    sessionStorage.setItem(this.TOKEN_KEY,token);
     this.loggedIn.next(true);
   }
 
   // Récupérer le token
   public getToken(): string | null {
-    return localStorage.getItem(this.TOKEN_KEY);
+    if(sessionStorage.getItem(this.TOKEN_KEY) != null){
+      this.loggedIn.next(true);
+      return sessionStorage.getItem(this.TOKEN_KEY);
+    }
+    return null;
   }
 
   // Supprimer le token (déconnexion)
   public clearToken(): void {
-    localStorage.removeItem(this.TOKEN_KEY);
+    sessionStorage.removeItem(this.TOKEN_KEY)
     this.loggedIn.next(false);
   }
 

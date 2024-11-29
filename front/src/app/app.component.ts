@@ -10,8 +10,6 @@ export class AppComponent {
 
   @HostListener('window:beforeunload', ['$event'])
   unloadHandler(event: Event) {
-    // Appeler la méthode souhaitée lors de la fermeture de l'application
-    localStorage.clear();
   }
 
 }
