@@ -34,3 +34,52 @@
   #errormessage{
     color: red;
   }
+
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    color: black;
+    padding: 10px 20px;
+    border-bottom: 2px solid black;
+  }
+  
+  .logo img {
+    height: 50px;
+  }
+  .form-container{
+    width: 30%;
+  }
+  #arrow{
+    margin-top: 5%;
+    margin-left: 5%;
+    zoom: 300%;
+    text-decoration: none;
+  }
+  /* Media Queries pour les appareils mobiles */
+  @media (max-width: 700px) {
+    form{
+      margin: 10%;
+    }
+    nav{
+      border-bottom: none; /* Supprime complètement la bordure */
+    }
+
+    /* Centrer et agrandir le logo spécifiquement pour les écrans de téléphone */
+    .logo {
+      display: flex;  /* Utilisation de flexbox pour centrer le logo */
+      justify-content: center;  /* Centre le logo horizontalement */
+      width: 100%;  /* Prend toute la largeur disponible */
+      zoom: 200%;
+      margin-top: 10%;
+    }
+    .form-container{
+      width: 80%;
+    }
+    #arrow{
+      position: absolute;
+      top: -2%;
+    }
+  }
+ 

@@ -99,6 +99,12 @@
     font-weight: bold;
     font-size: 20px;
   }
+  a{
+    margin-top: 5%;
+    display: flex;
+    justify-content: center;
+    color: red;
+  }
   /* Media query pour les petits écrans (comme les téléphones) */
 @media (max-width: 768px) {
     .topic-container {

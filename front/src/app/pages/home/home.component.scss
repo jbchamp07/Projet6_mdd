@@ -25,14 +25,28 @@
   text-transform: none !important; /* Empêche la mise en majuscules automatique si Material le fait */
 
 }
-/* Media query pour les petits écrans (comme les téléphones) */
+/* Cacher la navbar sur les petits écrans */
 @media (max-width: 768px) {
+  
+
+  .center {
+    flex-direction: column; /* Aligne verticalement les éléments */
+    text-align: center; /* Centre les éléments horizontalement */
+  }
+
+  img {
+    width: 80%; /* Ajuste la taille de l'image pour les petits écrans */
+    //max-width: 200px; /* Limite la largeur maximale */
+    margin-bottom: 20px; /* Espacement en dessous de l'image */
+  }
+
   .buttons {
     flex-direction: column; /* Aligne les boutons verticalement */
-    gap: 10px; /* Plus grand espacement entre les boutons */
+    gap: 15px; /* Ajoute un espace raisonnable entre les boutons */
   }
 
   .custom-button {
-    width: 80%; /* Ajuste la largeur des boutons à 80% pour les petits écrans */
+    width: 80%; /* Ajuste la largeur des boutons */
+    max-width: 300px; /* Limite la largeur maximale */
   }
 }

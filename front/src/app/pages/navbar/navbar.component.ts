@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { TokenService } from 'src/app/services/token.service';
 import { UserServiceService } from 'src/app/services/user.service';
@@ -10,15 +10,23 @@ import { UserServiceService } from 'src/app/services/user.service';
 })
 export class NavbarComponent implements OnInit {
   menuOpen = false;
-  constructor(public tokenService: TokenService,private userService: UserServiceService) { }
+  constructor(public tokenService: TokenService) { }
   toggleMenu() {
     this.menuOpen = !this.menuOpen;
   }
   ngOnInit(): void {
   }
+// Écouteur d'événements pour fermer le menu lorsqu'on clique en dehors de la navbar
+@HostListener('document:click', ['$event'])
+closeMenuOnClickOutside(event: MouseEvent) {
+  const clickedElement = event.target as HTMLElement;
+  const menu = document.querySelector('.nav-links');
+  const menuButton = document.querySelector('.menu-toggle');
 
-  logOut() {
-    this.userService.logout();
-    }
+  // Fermer le menu si le clic est en dehors du menu ou du bouton hamburger
+  if (menu && menuButton && !menu.contains(clickedElement) && !menuButton.contains(clickedElement)) {
+    this.menuOpen = false;
+  }
+}
 
 }

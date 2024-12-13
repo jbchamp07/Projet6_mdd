@@ -1,11 +1,11 @@
 <div id="header">
-    <a [routerLink]="['/posts/create']" class="create-button">Créer article</a>
-    <span>Trié par:</span>
-    <select id="sort" [(ngModel)]="selectedSortOption" (change)="onSortChange()">
+    <a [routerLink]="['/posts/create']" class="create-button">Créer un article</a>
+    <span id="sort">Trié par &#8595;</span>
+    <!-- <select id="sort" [(ngModel)]="selectedSortOption" (change)="onSortChange()">
         <option value="date asc">Date</option>
         <option value="alphabet asc">Titre</option>
         <option value="username">Auteur</option>
-    </select>
+    </select> -->
 </div>
 <div class="post-container">
     <div class="post" *ngFor="let post of posts$ | async">

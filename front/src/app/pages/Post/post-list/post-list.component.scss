@@ -3,7 +3,7 @@
     padding: 10px 20px;
     font-size: 16px;
     color: white;
-    background-color: #007bff;
+    background-color: blueviolet;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -72,4 +72,32 @@
 
 #post-link {
     text-decoration: none;
+}
+#sort{
+    float: right;
+    margin: 1%;
+    zoom: 150%;
+}
+@media (max-width: 768px){
+
+    .post-container{
+        grid-template-columns: 1fr;
+    }
+    #header {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+
+    #header .create-button {
+        margin: 0 10 0 0; /* Supprime les marges latérales */
+    }
+
+    #sort {
+        float: none; /* Supprime le flottement */
+        margin: 0; /* Supprime les marges externes */
+    }
 }

@@ -1,4 +1,4 @@
-<nav>
+<nav *ngIf="(tokenService.isLoggedIn$ | async)">
   <div class="logo">
     <img src="/assets/logo_p6.png" alt="Logo" />
   </div>
@@ -6,13 +6,12 @@
     &#9776;
   </button>
   <ul class="nav-links" [ngClass]="{'active': menuOpen}">
-    <li *ngIf="(tokenService.isLoggedIn$ | async)"><a routerLink="/posts">Articles</a></li>
+    <li id="toplist" *ngIf="(tokenService.isLoggedIn$ | async)"><a routerLink="/posts">Articles</a></li>
     <li *ngIf="(tokenService.isLoggedIn$ | async)"><a routerLink="/topics">Thèmes</a></li>
-    <li *ngIf="(tokenService.isLoggedIn$ | async)">
+    <li id="profile" *ngIf="(tokenService.isLoggedIn$ | async)">
       <a routerLink="/user/me" aria-label="Profil">
         👤
       </a>
     </li>
-    <li *ngIf="(tokenService.isLoggedIn$ | async)"><a (click)="logOut()">Se déconnecter</a></li>
   </ul>
 </nav>

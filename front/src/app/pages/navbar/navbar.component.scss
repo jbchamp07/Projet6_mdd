@@ -95,8 +95,9 @@ nav {
   }
 
   .nav-links li {
-    margin: 20px 0; /* Espacement entre les éléments */
-    text-align: center; /* Centrer les liens */
+    margin: 10px 0; /* Espacement entre les éléments */
+    text-align: right; /* Centrer les liens */
+    margin-right: 10%;
   }
 
   .menu-toggle {
@@ -111,5 +112,15 @@ nav {
     display: block;
     margin: 0 auto;
     height: 80px;
+  }
+
+  #profile{
+    position: absolute;
+    bottom: 1%;
+    right: 0%;
+    zoom: 200%;
+  }
+  #toplist{
+    margin-top: 20%;
   }
 }

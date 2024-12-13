@@ -47,4 +47,9 @@ export class MeComponent implements OnInit {
       }
     );
   }
+
+  logOut() {
+    this.userService.logout();
+    }
+
 }

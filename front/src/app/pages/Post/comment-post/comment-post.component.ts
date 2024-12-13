@@ -4,7 +4,9 @@ import { Observable } from 'rxjs';
 import { NewComment } from 'src/app/dto/NewComment';
 import { Comment } from 'src/app/interfaces/Comment';
 import { Post } from 'src/app/interfaces/Post';
+import { User } from 'src/app/interfaces/User';
 import { PostService } from 'src/app/services/post.service';
+import { UserServiceService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-comment-post',
@@ -15,9 +17,10 @@ export class CommentPostComponent implements OnInit {
   post!: Post;
   postId: number = 0;
   comments!: Comment[];
+  user!: User;
 
   newComment: NewComment = {message: ""};
-  constructor(private postService: PostService, private route: ActivatedRoute) { }
+  constructor(private postService: PostService, private route: ActivatedRoute,private userService: UserServiceService) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
@@ -31,15 +34,18 @@ export class CommentPostComponent implements OnInit {
       });
 
     });
-    
+    this.userService.getUserInfo().subscribe(u => {
+      this.user = u;
+    });
   }
 
   addComment() {
     if (this.newComment.message.trim()) {
-      
+      let c: Comment = {createdAt: "maintenant", message: this.newComment.message,user:this.user}
+
       this.postService.addComment(this.postId,this.newComment).subscribe(
         response => {
-          //this.comments.push()
+          this.comments.push(c);
         alert("Commentaire ajouté avec succès");
       },
       error => {
