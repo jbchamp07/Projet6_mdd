@@ -29,6 +29,15 @@ public class JwtService {
                 .compact();
         return token;
     }
+    public String generateTokens(String emailOrUsername){
+        String token = Jwts.builder()
+                .subject(emailOrUsername)
+                .issuedAt(new Date(System.currentTimeMillis()))
+                .expiration(new Date(System.currentTimeMillis() + 24*60*60*1000))
+                .signWith(getSigninKey())
+                .compact();
+        return token;
+    }
     //Extract claim from token
     public <T> T extractClaim(String token, Function<Claims,T> resolver){
         Claims claims = extractAllClaims(token);

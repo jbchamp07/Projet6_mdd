@@ -4,6 +4,7 @@ import com.openclassrooms.mddapi.DTO.*;
 import com.openclassrooms.mddapi.Model.User;
 import com.openclassrooms.mddapi.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -23,6 +24,8 @@ public class UserService {
     private JwtService jwtService;
     @Autowired
     private PasswordEncoder passwordEncoder;
+    @Autowired
+    private AuthenticationManager authenticationManager;
 
     //Get user information by is id
     public User getUserById(long id){
@@ -49,12 +52,19 @@ public class UserService {
         return new AuthSuccess(token);
     }
     //Authenticate
-    public AuthSuccess authenticate(LoginRequest request) throws Exception {
-        User user;
+    public AuthSuccess authenticate(LoginRequest request){
+        authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));
+        String token = jwtService.generateTokens(request.getUsername());
+        SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(request.getUsername(),request.getPassword()));
+        return new AuthSuccess(token);
+        /*User user;
         try{
-            user = userRepository.findByEmail(request.getUsername()).get();
+            user = userRepository.findByEmailOrUsername(request.getUsername(),request.getUsername()).get();
+            //user = userRepository.findByEmail(request.getUsername()).get();
         }catch (NoSuchElementException e){
-            user = userRepository.findByUsername(request.getUsername()).get();
+            return new AuthSuccess("Erreur d'identifiant");
+            //user = userRepository.findByUsername(request.getUsername()).get();
         }
 
     if(passwordEncoder.matches(request.getPassword(),user.getPassword())){
@@ -62,8 +72,9 @@ public class UserService {
             SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(user.getUsername(),request.getPassword()));
             return new AuthSuccess(token);
     }else{
-        throw new Exception("Email or password incorrect");
-    }
+        return new AuthSuccess("Email or password incorrect");
+        //throw new Exception("Email or password incorrect");
+    }*/
     }
     //Get user by authentication
     public User getUserInfo() {

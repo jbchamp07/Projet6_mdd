@@ -24,12 +24,14 @@ public class UserController {
 
     //Login
     @PostMapping("login")
-    public ResponseEntity<AuthSuccess> login(@RequestBody LoginRequest user){
-        try{
+    @ResponseStatus(HttpStatus.CREATED)
+    public AuthSuccess login(@RequestBody LoginRequest user){
+        return userService.authenticate(user);
+        /*try{
             return ResponseEntity.ok(userService.authenticate(user));
         }catch (Exception e){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new AuthSuccess("Token"));
-        }
+        }*/
 
     }
 

@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     if (this.username && this.password) {
       this.userService.login(this.username,this.password);
-      this.logginWork = true;
+      //this.logginWork = true;
     } else {
       alert('Le formulaire est invalide');
     }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { NewComment } from 'src/app/dto/NewComment';
 import { Comment } from 'src/app/interfaces/Comment';
@@ -20,7 +20,7 @@ export class CommentPostComponent implements OnInit {
   user!: User;
 
   newComment: NewComment = {message: ""};
-  constructor(private postService: PostService, private route: ActivatedRoute,private userService: UserServiceService) { }
+  constructor(private postService: PostService, private route: ActivatedRoute,private userService: UserServiceService,private router: Router) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
@@ -28,6 +28,9 @@ export class CommentPostComponent implements OnInit {
 
       this.postService.GetPostById(this.postId).subscribe(p =>{
         this.post = p;
+      //TODO Error a gérer
+      },error => {
+        
       });
       this.postService.getComments(this.postId).subscribe(c => {
         this.comments = c;
