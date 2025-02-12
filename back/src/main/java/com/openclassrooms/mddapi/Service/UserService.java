@@ -53,12 +53,12 @@ public class UserService {
     }
     //Authenticate
     public AuthSuccess authenticate(LoginRequest request){
-        authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));
+        /*authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(request.getUsername(),  request.getPassword()));
         String token = jwtService.generateTokens(request.getUsername());
         SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(request.getUsername(),request.getPassword()));
-        return new AuthSuccess(token);
-        /*User user;
+        return new AuthSuccess(token);*/
+        User user;
         try{
             user = userRepository.findByEmailOrUsername(request.getUsername(),request.getUsername()).get();
             //user = userRepository.findByEmail(request.getUsername()).get();
@@ -74,7 +74,7 @@ public class UserService {
     }else{
         return new AuthSuccess("Email or password incorrect");
         //throw new Exception("Email or password incorrect");
-    }*/
+    }
     }
     //Get user by authentication
     public User getUserInfo() {
