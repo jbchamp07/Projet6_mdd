@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { Topic } from 'src/app/interfaces/Topic';
 import { User } from 'src/app/interfaces/User';
 import { TopicServiceService } from 'src/app/services/topic.service';
@@ -9,25 +11,31 @@ import { UserServiceService } from 'src/app/services/user.service';
   templateUrl: './me.component.html',
   styleUrls: ['./me.component.scss']
 })
-export class MeComponent implements OnInit {
+export class MeComponent implements OnInit, OnDestroy {
 
   user!: User;
-
+  private destroy$ = new Subject<void>();
   topics!: Topic[];
   constructor(private userService: UserServiceService, private topicService: TopicServiceService) { }
 
   ngOnInit(): void {
-    this.userService.getUserInfo().subscribe(u => {
+    this.userService.getUserInfo()
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(u => {
       this.user = u;
     });
-    this.topicService.getUserTopics().subscribe(t => {
+    this.topicService.getUserTopics()
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(t => {
       this.topics = t;
     });
   }
 
 
   onSubmit() {
-    this.userService.updateUser(this.user).subscribe(
+    this.userService.updateUser(this.user)
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(
       response => {
         alert("Modification éffectué avec succès");
       },
@@ -38,7 +46,9 @@ export class MeComponent implements OnInit {
   }
 
   unsubscribe(topicId: number) {
-    this.topicService.unSubscribe(topicId).subscribe(
+    this.topicService.unSubscribe(topicId)
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(
       response => {
         alert("Désabonnement OK");
       },
@@ -50,6 +60,11 @@ export class MeComponent implements OnInit {
 
   logOut() {
     this.userService.logout();
+    }
+
+    ngOnDestroy(): void {
+      this.destroy$.next();
+      this.destroy$.complete(); 
     }
 
 }

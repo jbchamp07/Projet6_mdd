@@ -16,6 +16,7 @@ export class TokenService {
   // Sauvegarder le token dans le localStorage
   public saveToken(token: string): void {
     sessionStorage.setItem(this.TOKEN_KEY,token);
+    console.log(token)
     this.loggedIn.next(true);
   }
 

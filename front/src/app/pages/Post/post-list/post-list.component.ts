@@ -19,7 +19,6 @@ export class PostListComponent implements OnInit {
 
   ngOnInit(): void {
     this.posts$ = this.postService.getAll();
-    console.log(this.posts$);
   }
   
   //Sorting posts

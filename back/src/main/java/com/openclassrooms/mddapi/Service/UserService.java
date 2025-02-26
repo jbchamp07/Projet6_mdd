@@ -72,7 +72,7 @@ public class UserService {
             SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(user.getUsername(),request.getPassword()));
             return new AuthSuccess(token);
     }else{
-        return new AuthSuccess("Email or password incorrect");
+        return new AuthSuccess("Erreur d'identifiant");
         //throw new Exception("Email or password incorrect");
     }
     }
@@ -86,11 +86,19 @@ public class UserService {
     //Update user informations
     public MessageResponse updateUser(UserUpdater userUpdated) {
         try{
+
+            if(userUpdated.getPassword() != getUserInfo().getPassword()){
+                userUpdated.setPassword(passwordEncoder.encode(userUpdated.getPassword()));
+            }
+
             User user = getUserInfo();
             user.setUsername(userUpdated.getUsername());
             user.setEmail(userUpdated.getEmail());
             userRepository.save(user);
-            return new MessageResponse("Modifier éffectué avec succès");
+            //TODO
+            String token = jwtService.generateToken(user);
+            return new MessageResponse(token);
+            //return new MessageResponse("Modifier éffectué avec succès");
         }catch (Exception e){
             return new MessageResponse("Erreur lors de la modification");
         }

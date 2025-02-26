@@ -1,18 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { Post } from 'src/app/interfaces/Post';
 import { Topic } from 'src/app/interfaces/Topic';
 import { PostService } from 'src/app/services/post.service';
 import { TopicServiceService } from 'src/app/services/topic.service';
-
+import { takeUntil } from 'rxjs/operators';
 @Component({
   selector: 'app-create-post',
   templateUrl: './create-post.component.html',
   styleUrls: ['./create-post.component.scss']
 })
-export class CreatePostComponent implements OnInit {
+export class CreatePostComponent implements OnInit, OnDestroy {
 
+  private destroy$ = new Subject<void>();
   allTopics$!: Observable<Topic[]>;
   post : Post = {
     title: '',
@@ -31,7 +32,9 @@ export class CreatePostComponent implements OnInit {
 
   onSubmit() {
     if (this.post.title && this.post.topics && this.post.description) {
-      this.postService.createPost(this.post).subscribe(
+      this.postService.createPost(this.post)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(
         response => {
         alert("Post créer");
         this.router.navigate(['/posts']);
@@ -45,6 +48,9 @@ export class CreatePostComponent implements OnInit {
     }
   }
 
-
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete(); 
+  }
 
 }
