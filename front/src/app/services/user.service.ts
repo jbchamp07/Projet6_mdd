@@ -63,22 +63,17 @@ public updateUser(user: User): Observable<string> {
       return "Modification éffectué avec succès";
     }
   });*/
-  if(user.password == ""){
+  /*if(user.password == ""){
     this.getUserInfo()
     .pipe(takeUntil(this.destroy$))
     .subscribe(u => {
         user.password = u.password
     });
-  }
+  }*/
 
   return this.httpClient.put<string>(`${this.apiUrl}/me/update`, user).pipe(
-    map(token => {
-      if (token === "Erreur lors de la modification") {
-        return "Erreur lors de la modification";
-      } else {
-        this.tokenService.saveToken(token);
-        return "Modification effectuée avec succès";
-      }
+    map(messageResponse => {
+      return messageResponse;
     })
   );
   //return this.httpClient.put<string>(`${this.apiUrl}/me/update`,user);

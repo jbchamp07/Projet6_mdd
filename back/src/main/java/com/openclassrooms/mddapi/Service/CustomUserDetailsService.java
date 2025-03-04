@@ -30,4 +30,12 @@ public class CustomUserDetailsService implements UserDetailsService {
         return userDetails;
     }
 
+    public UserDetails loadUserById(long userId) {
+        User user = userRepository.findById(userId).get();
+        if (user == null) {
+            throw new UsernameNotFoundException("User not found with id: " + userId);
+        }
+        UserDetails userDetails = org.springframework.security.core.userdetails.User.builder().username(user.getUsername()).password(user.getPassword()).authorities(Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER"))).build();
+        return userDetails;
+    }
 }

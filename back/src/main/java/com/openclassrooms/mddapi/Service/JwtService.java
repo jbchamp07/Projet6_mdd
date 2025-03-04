@@ -5,6 +5,7 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
@@ -16,13 +17,14 @@ import java.util.function.Function;
 @Service
 public class JwtService {
 
-    //@Value("${Chatop.SECRET_KEY}")
-    private String SECRET_KEY = "798d97bad82ae937ef5af3529b7c2843f70473d40e068145631f7bd838044b55";
+    @Value("${SECRET_KEY}")
+    private String SECRET_KEY;
+    //private String SECRET_KEY = "798d97bad82ae937ef5af3529b7c2843f70473d40e068145631f7bd838044b55";
 
     //Generate token
     public String generateToken(User user){
         String token = Jwts.builder()
-                .subject(user.getUsername())
+                .subject(String.valueOf(user.getId()))
                 .issuedAt(new Date(System.currentTimeMillis()))
                 .expiration(new Date(System.currentTimeMillis() + 24*60*60*1000))
                 .signWith(getSigninKey())
@@ -47,10 +49,16 @@ public class JwtService {
     public String extractUserName(String token){
         return extractClaim(token,Claims::getSubject);
     }
+    //Extract user ID from token (instead of username)
+    public Long extractUserId(String token){
+        return Long.parseLong(extractClaim(token, Claims::getSubject));  // Convertir en Long
+    }
     //Verify the token validity with username and expiration
-    public boolean isValid(String token, UserDetails user){
-        String username = extractUserName(token);
-        return (username.equals(user.getUsername())) && !isTokenExpired(token);
+    public boolean isValid(String token, long id){
+        //String username = extractUserName(token);
+        //return (username.equals(user.getUsername())) && !isTokenExpired(token);
+        long userId = extractUserId(token);
+        return (userId == id && !isTokenExpired(token));
     }
 
     //Verify the token expiration limit
@@ -72,5 +80,4 @@ public class JwtService {
     private Claims extractAllClaims(String token){
         return Jwts.parser().verifyWith(getSigninKey()).build().parseSignedClaims(token).getPayload();
     }
-
 }

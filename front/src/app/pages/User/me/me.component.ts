@@ -23,6 +23,7 @@ export class MeComponent implements OnInit, OnDestroy {
     .pipe(takeUntil(this.destroy$))
     .subscribe(u => {
       this.user = u;
+      u.password = ""
     });
     this.topicService.getUserTopics()
     .pipe(takeUntil(this.destroy$))
@@ -38,9 +39,11 @@ export class MeComponent implements OnInit, OnDestroy {
     .subscribe(
       response => {
         alert("Modification éffectué avec succès");
+        this.user.password = "";
       },
       error => {
         alert("Erreur lors de la modification");
+        this.user.password = "";
       }
     );
   }
@@ -56,6 +59,7 @@ export class MeComponent implements OnInit, OnDestroy {
         alert("Erreur lors du Désabonnement");
       }
     );
+    window.location.reload();
   }
 
   logOut() {

@@ -93,17 +93,17 @@
   .comment-author {
     margin-right: 10px; /* Ajoute un espace entre l'auteur et le message */
   }
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 800px) {
     .comment-form .send-icon {
-      font-size: 18px; /* Réduit la taille de l'icône */
-      margin-left: 15px; /* Ajuste légèrement la position */
+      font-size: 16px; /* Réduit la taille de l'icône */
+      margin-left: 20px; /* Ajuste légèrement la position */
       bottom: 30%;
     }
   }
   
   @media screen and (max-width: 400px) {
     .comment-form .send-icon {
-      font-size: 16px; /* Encore plus petit sur les écrans très petits */
+      font-size: 10px; /* Encore plus petit sur les écrans très petits */
       margin-left: 15px;
       bottom: 25%;
     }

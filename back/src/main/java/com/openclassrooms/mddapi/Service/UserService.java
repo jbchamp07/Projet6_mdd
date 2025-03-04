@@ -86,19 +86,20 @@ public class UserService {
     //Update user informations
     public MessageResponse updateUser(UserUpdater userUpdated) {
         try{
-
-            if(userUpdated.getPassword() != getUserInfo().getPassword()){
-                userUpdated.setPassword(passwordEncoder.encode(userUpdated.getPassword()));
-            }
-
             User user = getUserInfo();
+            if(!passwordEncoder.matches(userUpdated.getPassword(),user.getPassword())){
+                if(userUpdated.getPassword() == ""){
+                    userUpdated.setPassword(user.getPassword());
+                }else{
+                    userUpdated.setPassword(passwordEncoder.encode(userUpdated.getPassword()));
+                    user.setPassword(userUpdated.getPassword());
+                }
+            }
+            user.setPassword(userUpdated.getPassword());
             user.setUsername(userUpdated.getUsername());
             user.setEmail(userUpdated.getEmail());
             userRepository.save(user);
-            //TODO
-            String token = jwtService.generateToken(user);
-            return new MessageResponse(token);
-            //return new MessageResponse("Modifier éffectué avec succès");
+            return new MessageResponse("Modification éffectué avec succès");
         }catch (Exception e){
             return new MessageResponse("Erreur lors de la modification");
         }

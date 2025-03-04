@@ -6,7 +6,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 })
 export class TokenService {
 
-  private TOKEN_KEY = '798d97bad82ae937ef5af3529b7c2843f70473d40e068145631f7bd838044b55';
+  private TOKEN_KEY = 'token';
 
   private loggedIn = new BehaviorSubject<boolean>(false); // Valeur par défaut
   isLoggedIn$ = this.loggedIn.asObservable();
@@ -16,7 +16,6 @@ export class TokenService {
   // Sauvegarder le token dans le localStorage
   public saveToken(token: string): void {
     sessionStorage.setItem(this.TOKEN_KEY,token);
-    console.log(token)
     this.loggedIn.next(true);
   }
 
